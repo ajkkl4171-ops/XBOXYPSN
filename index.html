@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xbox & PlayStation Gift Cards</title>
+
+<style>
+:root{
+  --bg:#07090f;
+  --xbox:#107c10;
+  --ps:#003087;
+  --card:#10131d;
+  --text:#f1f5ff;
+  --muted:#9aa3c7;
+  --border:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,Segoe UI,Roboto,Arial;
+  background:radial-gradient(900px 400px at 10% -10%, #102014 0%, transparent 60%), var(--bg);
+  color:var(--text);
+}
+.wrap{max-width:1200px;margin:auto;padding:30px 16px 60px}
+header{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+  padding:20px;border-radius:20px;background:#0c0f18;border:1px solid var(--border)
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{
+  width:48px;height:48px;border-radius:14px;
+  display:grid;place-items:center;
+  font-weight:900;font-size:18px;
+  background:linear-gradient(135deg,var(--xbox),var(--ps));
+}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{
+  font-size:12px;padding:6px 10px;border-radius:999px;
+  border:1px solid var(--border);color:var(--muted)
+}
+.grid{
+  display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:18px
+}
+@media(max-width:980px){.grid{grid-template-columns:1fr}}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:18px
+}
+.tabs{display:flex;gap:10px;margin-bottom:16px}
+.tab{
+  flex:1;text-align:center;padding:12px;border-radius:14px;
+  cursor:pointer;font-weight:800;
+  background:#0b0e17;border:1px solid var(--border)
+}
+.tab.active.xbox{background:var(--xbox)}
+.tab.active.ps{background:var(--ps)}
+.list{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px
+}
+.item{
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  background:#0b0e17
+}
+.item .title{font-weight:900;font-size:16px}
+.item .price{margin:10px 0;font-size:18px;font-weight:900}
+.btn{
+  width:100%;
+  padding:12px;border-radius:12px;
+  border:none;cursor:pointer;font-weight:900
+}
+.btn.xbox{background:linear-gradient(135deg,#18b718,#0e5f0e);color:#fff}
+.btn.ps{background:linear-gradient(135deg,#1b5cff,#003087);color:#fff}
+.panel input,.panel select{
+  width:100%;padding:12px;margin-top:10px;
+  border-radius:10px;border:1px solid var(--border);
+  background:#070a14;color:var(--text)
+}
+.paybox{
+  display:none;margin-top:12px;
+  border:1px solid var(--border);
+  border-radius:12px;padding:14px;background:#070a14
+}
+.footer{
+  margin-top:30px;text-align:center;font-size:12px;color:var(--muted)
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <div class="logo">GC</div>
+    <div>
+      <h1>Gift Cards Xbox & PlayStation</h1>
+      <div style="font-size:12px;color:var(--muted)">Códigos digitales · Entrega manual</div>
+    </div>
+  </div>
+  <div class="badges">
+    <div class="badge">💳 USDT · BTC · MX / OXXO</div>
+    <div class="badge">🛡️ Verificación manual</div>
+    <div class="badge">⚡ Entrega rápida</div>
+  </div>
+</header>
+
+<div class="grid">
+
+<div class="card">
+  <div class="tabs">
+    <div class="tab xbox active" onclick="show('xbox')">🎮 XBOX</div>
+    <div class="tab ps" onclick="show('ps')">🎮 PLAYSTATION</div>
+  </div>
+
+  <div id="xbox" class="list"></div>
+  <div id="ps" class="list" style="display:none"></div>
+</div>
+
+<div class="card panel">
+  <h2>Registro</h2>
+  <input id="email" placeholder="Correo electrónico">
+
+  <h2 style="margin-top:18px">Carrito</h2>
+  Producto: <b id="prod">—</b><br>
+  Total: <b id="total">—</b>
+
+  <h2 style="margin-top:18px">Pago</h2>
+  <select id="method" onchange="showPay()">
+    <option value="">Selecciona método</option>
+    <option value="usdt">USDT</option>
+    <option value="btc">BTC</option>
+    <option value="mx">Transferencia / OXXO</option>
+  </select>
+
+  <div id="usdt" class="paybox">
+    USDT TRC20<br>
+    <b>TUT4ZqQYEv32oiUGC3pNmYBYEoUUGMm1eV</b>
+  </div>
+
+  <div id="btc" class="paybox">
+    BTC<br>
+    <b>1K6jsMAfJJMEQ6dPmJDV7CEZfDGHhsXznw</b>
+  </div>
+
+  <div id="mx" class="paybox">
+    <b>BANREGIO</b><br>
+    058597000077868264<br>
+    Gildardo Roman Guzman<br><br>
+    <b>OXXO</b><br>
+    4741742995244707<br>
+    Gildardo Roman Guzman
+  </div>
+
+  <button class="btn xbox" style="margin-top:16px" onclick="confirm()">
+    ✅ Ya realicé el pago
+  </button>
+</div>
+
+</div>
+
+<div class="footer">
+  Envía el comprobante a <b>NAUSE627@OUTLOOK.COM</b><br>
+  Un administrador confirmará tu Gift Card
+</div>
+
+</div>
+
+<script>
+// ===== PRECIOS SEGÚN LO PEDIDO =====
+const XBOX=[
+ {n:"Xbox Gift Card $500 MXN",p:100},
+ {n:"Xbox Gift Card $1,000 MXN",p:200},
+ {n:"Xbox Gift Card $2,000 MXN",p:400},
+ {n:"Xbox Gift Card $5,000 MXN",p:500}
+];
+const PS=[
+ {n:"PlayStation Store $500 MXN",p:100},
+ {n:"PlayStation Store $1,000 MXN",p:200},
+ {n:"PlayStation Store $2,000 MXN",p:400},
+ {n:"PlayStation Store $5,000 MXN",p:500}
+];
+
+let selected=null;
+
+function render(){
+  xbox.innerHTML=XBOX.map(x=>item(x,"xbox")).join("");
+  ps.innerHTML=PS.map(x=>item(x,"ps")).join("");
+}
+function item(o,t){
+  return `
+  <div class="item">
+    <div class="title">${o.n}</div>
+    <div class="price">MXN $${o.p}</div>
+    <button class="btn ${t}" onclick="select('${o.n}',${o.p})">Elegir</button>
+  </div>`;
+}
+function select(n,p){
+  selected={n,p};
+  prod.textContent=n;
+  total.textContent="MXN $"+p;
+}
+function show(tab){
+  xbox.style.display=tab==="xbox"?"grid":"none";
+  ps.style.display=tab==="ps"?"grid":"none";
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelector(`.tab.${tab}`).classList.add("active");
+}
+function showPay(){
+  ["usdt","btc","mx"].forEach(x=>document.getElementById(x).style.display="none");
+  const m=method.value;
+  if(m) document.getElementById(m).style.display="block";
+}
+function confirm(){
+  if(!email.value.includes("@")) return alert("Ingresa un correo válido");
+  if(!selected) return alert("Selecciona un producto");
+  alert("Envía el comprobante a NAUSE627@OUTLOOK.COM");
+}
+render();
+</script>
+
+</body>
+</html>
